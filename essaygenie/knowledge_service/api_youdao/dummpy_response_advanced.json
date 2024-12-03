@@ -1,0 +1,216 @@
+{
+    "RequestId": "9cd0e024-5927-4c43-8fbf-0d36462cb4ca",
+    "errorCode": "0",
+    "Result": {
+      "rawEssay": "Actually, it is sort of a fish berry jam. Lots of job loss is just one thing resulting from automation. We do the essential Python on 22nd September 2019. We do an important python on the 22nd of September 2019. We have five apples in the important things 5 on Sep 2019.",
+      "sentNum": 5,
+      "uniqueKey": "3b9e61e0-d6c1-4194-8cf6-2c4c9ae209c2",
+      "essayAdvice": "",
+      "totalScore": 0,
+      "totalEvaluation": "Excellent!",
+      "essayLangName": "English",
+      "majorScore": {
+        "grammarScore": 89.8,
+        "grammarAdvice": "存在少量语法错误，建议认真检查",
+        "topicScore": 66.2,
+        "wordScore": 89,
+        "wordAdvice": "单词拼写基本正确，单词拼写基础扎实；词汇量较为丰富，能使用一定数量的高级词汇",
+        "structureScore": 88.3,
+        "structureAdvice": "逻辑性不错，上下文关系衔接较为紧密"
+      },
+      "paraNum": 1,
+      "essayFeedback": {
+        "sentsFeedback": [
+          {
+            "rawSent": "Actually, it is sort of a fish berry jam.",
+            "paraId": 0,
+            "sentId": 0,
+            "errorPosInfos": [
+              {
+                "id": 1668590140818,
+                "isValidLangChunk": true,
+                "orgChunk": "Actually",
+                "errorTypeTitle": "词汇频繁使用",
+                "startPos": 0,
+                "correctChunk": "Actually",
+                "endPos": 8,
+                "cardSubtitle": "替换新单词",
+                "errBaseInfo": "词汇使用频繁，建议替换新单词",
+                "errToBBasicType": "",
+                "detailReason": "词汇使用频繁",
+                "exampleCases": [],
+                "nodeType": 1,
+                "structType": 3,
+                "showType": 2,
+                "target": [
+                  "Really",
+                  "Indeed"
+                ],
+                "vip": true
+              },
+              {
+                "id": 1668590140820,
+                "isValidLangChunk": true,
+                "orgChunk": "sort of",
+                "errorTypeTitle": "不必要的修饰词",
+                "startPos": 16,
+                "correctChunk": "sort of",
+                "endPos": 23,
+                "cardSubtitle": "删除修饰词",
+                "errBaseInfo": "学术用词具体、简洁，口语化的一些补白词不够正式，表意模糊，建议删除[rValidChunk]",
+                "errToBBasicType": "",
+                "detailReason": "学术用词具体、简洁，口语化的一些补白词不够正式，表意模糊",
+                "knowledgeExp": "学术写作要求用词明确、简洁，类似kind of的补白词模糊性较强，过于口语化，建议删除。",
+                "exampleCases": [
+                  {
+                    "error": "An oil does not blend with water",
+                    "rightTranslate": "油不溶于水。",
+                    "right": "Oil does not blend with water."
+                  }
+                ],
+                "nodeType": 1,
+                "showType": 2,
+                "structType": 2,
+                "target": [],
+                "vip": true
+              }
+            ],
+            "sentFeedback": "词汇频繁使用，建议替换新单词；不必要的修饰词，建议删除〖sort of〗",
+            "sentStartPos": 0,
+            "correctedSent": "Actually, it is sort of a fish berry jam.",
+            "isContainGrammarError": false,
+            "isContainTypoError": false,
+            "isValidLangSent": true
+          },
+          {
+            "rawSent": "We do the essential Python on 22nd September 2019.",
+            "paraId": 0,
+            "sentId": 2,
+            "errorPosInfos": [
+              {
+                "id": 1668590140825,
+                "isValidLangChunk": true,
+                "orgChunk": "22nd September",
+                "errorTypeTitle": "日期表达不一致",
+                "startPos": 30,
+                "correctChunk": "22nd September",
+                "endPos": 44,
+                "cardSubtitle": "使用一致的日期表达",
+                "errBaseInfo": "上下文日期表达不一致，建议使用一致的日期表达",
+                "errToBBasicType": "",
+                "detailReason": "上下文日期表达不一致",
+                "knowledgeExp": "日期有几种不同表达方式。January 20，January 20th，Jan. 20，以及20 January都是正确的。一篇文章通常保持日期表达一致。",
+                "exampleCases": [],
+                "parentId": "1668590140767",
+                "nodeType": 2,
+                "orgDateType": "Dth Month",
+                "showType": 2,
+                "structType": 4,
+                "vip": true,
+                "statInfo": [
+                  {
+                    "count": 1,
+                    "demo": "5th Dec",
+                    "item": "Dth Month"
+                  },
+                  {
+                    "count": 1,
+                    "demo": "The 5th of Dec",
+                    "item": "The Dth of Month"
+                  }
+                ]
+              }
+            ],
+            "sentFeedback": "大小写不统一，建议修改大小写；日期表达不一致，建议使用一致的日期表达",
+            "sentStartPos": 105,
+            "correctedSent": "We do the essential Python on 22nd September 2019.",
+            "isContainGrammarError": false,
+            "isContainTypoError": false,
+            "isValidLangSent": true
+          },
+          {
+            "rawSent": "We do an important python on the 22nd of September 2019.",
+            "paraId": 0,
+            "sentId": 3,
+            "errorPosInfos": [
+              {
+                "id": 1668590140828,
+                "isValidLangChunk": true,
+                "orgChunk": "the 22nd of September",
+                "orgDateType": "The Dth of Month",
+                "errorTypeTitle": "日期表达不一致",
+                "startPos": 29,
+                "correctChunk": "22nd September",
+                "endPos": 50,
+                "cardSubtitle": "使用一致的日期表达",
+                "errBaseInfo": "上下文日期表达不一致，建议使用一致的日期表达",
+                "errToBBasicType": "",
+                "detailReason": "上下文日期表达不一致",
+                "knowledgeExp": "日期有几种不同表达方式。January 20，January 20th，Jan. 20，以及20 January都是正确的。一篇文章通常保持日期表达一致。",
+                "exampleCases": [],
+                "parentId": "1668590140767",
+                "nodeType": 2,
+                "showType": 2,
+                "statInfo": [
+                  {
+                    "count": 1,
+                    "demo": "5th Dec",
+                    "item": "Dth Month"
+                  },
+                  {
+                    "count": 1,
+                    "demo": "The 5th of Dec",
+                    "item": "The Dth of Month"
+                  }
+                ],
+                "structType": 4,
+                "vip": true
+              }
+            ],
+            "sentFeedback": "词汇频繁使用，建议替换新单词；大小写不统一，建议修改大小写；日期表达不一致，建议使用一致的日期表达",
+            "sentStartPos": 156,
+            "correctedSent": "We do an important Python on 22nd September 2019.",
+            "isContainGrammarError": false,
+            "isContainTypoError": false,
+            "isValidLangSent": true
+          },
+          {
+            "rawSent": "We have 5 apples in the important things 5 on Sep 2019.",
+            "paraId": 0,
+            "sentId": 4,
+            "errorPosInfos": [
+              {
+                "id": 1668590140830,
+                "isValidLangChunk": true,
+                "orgChunk": "5",
+                "errorTypeTitle": "拼写不统一",
+                "startPos": 8,
+                "correctChunk": "five",
+                "endPos": 9,
+                "cardSubtitle": "拼写单词",
+                "errBaseInfo": "阿拉伯数字应该使用英文拼写，建议将[orgChunk]修改为[correctChunk]",
+                "errToBBasicType": "",
+                "detailReason": "阿拉伯数字应该使用英文拼写",
+                "knowledgeExp": "一般来说，0到9的数字都应该拼写出来。如果想要表达日期、地址、金钱、分数、百分比等情形，才使用阿拉伯数字。",
+                "exampleCases": [],
+                "nodeType": 1,
+                "structType": 2,
+                "showType": 2,
+                "target": [
+                  "Five"
+                ],
+                "vip": true
+              }
+            ],
+            "sentFeedback": "词汇频繁使用，建议替换新单词；拼写不统一，建议修改拼写",
+            "sentStartPos": 169,
+            "correctedSent": "We have five apples in the important things five on Sep 2019.",
+            "isContainGrammarError": false,
+            "isContainTypoError": false,
+            "isValidLangSent": true
+          }
+        ]
+      }
+    }
+  }
+  

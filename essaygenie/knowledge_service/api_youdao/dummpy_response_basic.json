@@ -1,0 +1,134 @@
+{
+    "RequestId": "9cd0e024-5927-4c43-8fbf-0d36462cb4ca",
+    "errorCode": "0",
+    "Result": {
+        "rawEssay": "Nowadays, more and more middle-aged people are suffering from insomnia, as life for the middle-aged is stressful indeed. For one thing, as they are the backbones of their companies, they have plenty of things to do at work. And they usually have to work overtime. For another, they have to take great responsibilities at home, for their aged parents need to be supported and their little children need to be brought up. That's why they don't have enough time to have a good rest. To sleep well, some of them often take sleeping pills. I don't think it's good for them to do so, because the sleeping pills can only get rid of the sign of insomnia, not the cause. And taking too much sleeping pills is bad for their health. Therefore, I suggest those middle-aged people should know how to relax themselves and rest their brains. Taking a simple walk after supper will be beneficial for them. Besides, they can have a glass of milk before going to bed, which can be helpful for their sleep.",
+        "sentNum": 11,
+        "uniqueKey": "46df4a57-1804-404f-985c-898401dfe1ab",
+        "essayAdvice": "作文整体水平较高",
+        "totalScore": 93,
+        "totalEvaluation": "Excellent!",
+        "essayLangName": "English",
+        "majorScore": {
+            "grammarScore": 89.8,
+            "grammarAdvice": "存在少量语法错误，建议认真检查",
+            "topicScore": 66.2,
+            "wordScore": 89,
+            "wordAdvice": "单词拼写基本正确，单词拼写基础扎实；词汇量较为丰富，能使用一定数量的高级词汇",
+            "structureScore": 88.3,
+            "structureAdvice": "逻辑性不错，上下文关系衔接较为紧密"
+        },
+        "paraNum": 1,
+        "essayFeedback": {
+            "sentsFeedback": [
+                {
+                    "rawSent": "Nowadays, more and more middle-aged people are suffering from insomnia, as life for the middle-aged is stressful indeed.",
+                    "paraId": 0,
+                    "sentId": 0,
+                    "errorPosInfos": [],
+                    "synInfo": null,
+                    "sentFeedback": "",
+                    "sentStartPos": 0,
+                    "correctedSent": "Nowadays, more and more middle-aged people are suffering from insomnia, as life for the middle-aged is stressful indeed.",
+                    "isContainGrammarError": false,
+                    "isContainTypoError": false,
+                    "isValidLangSent": true
+                },
+                {
+                    "rawSent": "For one thing, as they are the backbones of their companies, they have plenty of things to do at work.",
+                    "paraId": 0,
+                    "sentId": 1,
+                    "errorPosInfos": [],
+                    "synInfo": [
+                        {
+                            "id": 1667303677314,
+                            "sourcePos": "名词",
+                            "synType": "LEXICAL",
+                            "sourceTran": "n. 公司，企业；演出团，歌舞团；连队（company 的复数）；v. 陪伴，伴随（company 的第三人称单数）",
+                            "tagList": [
+                                "名词"
+                            ],
+                            "synId": 0,
+                            "source": [
+                                {
+                                    "startPos": 50,
+                                    "endPos": 59,
+                                    "word": "companies",
+                                    "stuLevel": [
+                                        2
+                                    ]
+                                }
+                            ],
+                            "target": [
+                                [
+                                    {
+                                        "startPos": 50,
+                                        "endPos": 59,
+                                        "word": "firms",
+                                        "tran": "n. 公司，厂商（firm 的复数）；v. 变得坚实（firm 的第三人称单数）",
+                                        "stuLevel": [
+                                            2
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ],
+                    "sentFeedback": "",
+                    "sentStartPos": 121,
+                    "correctedSent": "For one thing, as they are the backbones of their companies, they have plenty of things to do at work.",
+                    "isContainGrammarError": false,
+                    "isContainTypoError": false,
+                    "isValidLangSent": true
+                },
+                {
+                    "rawSent": "And taking too much sleeping pills is bad for their health.",
+                    "paraId": 0,
+                    "sentId": 7,
+                    "errorPosInfos": [
+                        {
+                            "id": 1667303701251,
+                            "isValidLangChunk": true,
+                            "orgChunk": "much",
+                            "errorTypeTitle": "不同类代词混淆",
+                            "startPos": 15,
+                            "correctChunk": "many",
+                            "endPos": 19,
+                            "cardSubtitle": "修改代词",
+                            "errBaseInfo": "代词类型混淆会使指代对象有误，建议将【much】修改为【many】",
+                            "errToBBasicType": "句法",
+                            "detailReason": "代词类型混淆会使指代对象有误",
+                            "knowledgeExp": "代词代替名词、名词性短语等，在句子可以作主语、宾语等。作主语时，代词可以表示动作的施动者；作宾语时，表明行为或动作的承受者。由此可见，不同类型代词的使用方式有一定的差别。",
+                            "exampleCases": [
+                                {
+                                    "right": "Half of the money was mine.",
+                                    "rightTranslate": "一半的钱是我的。",
+                                    "error": "Half of the money was my."
+                                },
+                                {
+                                    "right": "They did the cooking by themselves.",
+                                    "rightTranslate": "他们自己做饭。",
+                                    "error": "They did the cooking by theirs."
+                                }
+                            ]
+                        }
+                    ],
+                    "synInfo": null,
+                    "sentFeedback": "不同类代词混淆，建议将〖much〗修改为【many】",
+                    "sentStartPos": 661,
+                    "correctedSent": "And taking too many sleeping pills is bad for their health.",
+                    "isContainGrammarError": true,
+                    "isContainTypoError": false,
+                    "isValidLangSent": true
+                }
+            ]
+        },
+        "wordNum": 204,
+        "fullScore": 100,
+        "stLevel": "DEFAULT",
+        "stLevelCode": 0,
+        "title": "web",
+        "writeModel": 1,
+        "writeType": 1
+    }
+}
