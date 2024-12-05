@@ -1,15 +1,36 @@
 import os
 import logging
 import requests
-from typing import Optional
 from dotenv import load_dotenv
+from typing import List, Optional, TypedDict
 
 import essaygenie.utils as U
+from example import load_json_example
 from essaygenie.knowledge_service.api_youdao import auth_v3_util
 
 load_dotenv()
 logger = logging.getLogger()
 
+class ExampleCase(TypedDict):
+    right: str
+    rightTranslate: str
+    error: str
+
+class ErrorPosInfo(TypedDict):
+    errorTypeTitle: str
+    orgChunk: str
+    correctChunk: str
+    errorBaseInfo: Optional[str]
+    knowledgeExp: Optional[str]
+    exampleCases: List[ExampleCase]
+
+class SentenceAnalysisResult(TypedDict):
+    rawSent: str
+    errorPosInfos: List[ErrorPosInfo]
+    isContainGrammarError: bool
+    isContainTypoError: bool
+    isValidLangSent: bool
+        
 class YoudaoService:
     """ 与网易有道智能云相关的服务 """
     
@@ -30,16 +51,17 @@ class YoudaoService:
             'grade': grade,
             'to': title,
             'modelContent': model_content,
-            'isNeedSynonyms': True,
+            'isNeedSynonyms': "true",
             'correctVersion': "basic"
         }
         
-        auth_v3_util.add_auth_params(data)
+        auth_v3_util.add_auth_params(self.app_key,self.app_secret,data)
         
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         try:
             response = requests.post(self.api_url, headers=headers, data=data)
             response.raise_for_status()  
+            logger.info(f"Youdao Request successful: {response.status_code}")
             return response.json()
         except requests.RequestException as e:
             logger.error(f"Request failed: {e}")
@@ -49,23 +71,22 @@ class YoudaoService:
         """ 网易有道智云英文作文批改服务api并返回响应 """
         return U.load_json("essaygenie/knowledge_service/api_youdao/dummpy_response_basic.json")
         
-    def extract_error(self, response: dict):
+    def extract_error(self, response: dict) -> List[SentenceAnalysisResult]:
         """ 从网易有道智云英文作文批改服务api返回的响应中提取错误 """
         result = response.get('Result', {})
         essay_feedback = result.get('essayFeedback', {})
         sents_feedback = essay_feedback.get('sentsFeedback', [])
         
         error_infos = []
-        
+        # sents_feedback表示整个文章的反馈，每个元素feedback是一句话的反馈
         for feedback in sents_feedback:
-            # 每一句对应一个sentence_info
             sentence_info = {
                 'rawSent': feedback.get('rawSent', ''), 
             }
         
             error_pos_infos = feedback.get('errorPosInfos', [])
             if error_pos_infos:
-                #每一句都可能对应多个错误
+                # errorPosInfos表示一句话的错误信息，每个元素error_info是该句话中一处错误的信息
                 sentence_info['errorPosInfos'] = []
                 for error_info in error_pos_infos:
                     sentence_info['errorPosInfos'].append({
@@ -75,19 +96,32 @@ class YoudaoService:
                         'errorBaseInfo': error_info.get('errorBaseInfo', ''),
                         'knowledgeExp': error_info.get('knowledgeExp', ''),
                         'exampleCases': error_info.get('exampleCases', []),
-                        'isContainGrammarError': error_info.get('isContainGrammarError'),
-                        'isContainTypoError': error_info.get('isContainTypoError'),
-                        'isValidLangSent': error_info.get('isValidLangSent'),
                     })
-                   
+                sentence_info.update({
+                    'isContainGrammarError': feedback.get('isContainGrammarError'),
+                    'isContainTypoError': feedback.get('isContainTypoError'),
+                    'isValidLangSent': feedback.get('isValidLangSent'),
+                })
+                
             error_infos.append(sentence_info) 
         return error_infos
             
                 
         
 if __name__ == '__main__':
+    example = load_json_example("example01.json")
+    content = example['Content']
+    grade = example['Grade']
+    title = example['Title']
+    model_content = example['ModelContent']
+    
     youdao_service = YoudaoService()
-    youdao_res = youdao_service.send_request_dummpy()
+    youdao_res = youdao_service.send_request(
+        content=content,
+        grade=grade,
+        title=title,
+        model_content=model_content
+    )
     out = youdao_service.extract_error(youdao_res)
     print(out)
     

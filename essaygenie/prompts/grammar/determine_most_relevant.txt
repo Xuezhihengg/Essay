@@ -1,0 +1,10 @@
+ 用户输入一句语法解析（analysis），并输入一个包含若干语法概念的列表（concepts），请你判断这句语法解析与concepts中哪个语法概念最相关，并输出该语法概念，
+        需要注意一下要求：
+        1） 输出concepts中的元素必须为输入concepts中的其中之一，不允许捏造概念
+        2） 输出concepts中的元素必须只有一个，不允许为零个也不允许多与一个
+        3） 输出concepts中的元素必须是所有输入concepts中与解析analysis最相关的一个
+        
+        输出格式要求{format_instructions}
+        用户输入：语法解析：{analysis} \n 语法概念：{concepts}
+
+你是一名英语语言专家，现在给你一段英文句子和若干语法概念，请你判断

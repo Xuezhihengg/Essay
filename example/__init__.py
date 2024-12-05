@@ -41,3 +41,4 @@ def load_json_example(filename: str) -> Example:
             raise ValueError(f"JSON 文件格式错误: {e}")
     
     return content
+
