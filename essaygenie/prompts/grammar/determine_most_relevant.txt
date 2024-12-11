@@ -1,10 +1,15 @@
- 用户输入一句语法解析（analysis），并输入一个包含若干语法概念的列表（concepts），请你判断这句语法解析与concepts中哪个语法概念最相关，并输出该语法概念，
-        需要注意一下要求：
-        1） 输出concepts中的元素必须为输入concepts中的其中之一，不允许捏造概念
-        2） 输出concepts中的元素必须只有一个，不允许为零个也不允许多与一个
-        3） 输出concepts中的元素必须是所有输入concepts中与解析analysis最相关的一个
-        
-        输出格式要求{format_instructions}
-        用户输入：语法解析：{analysis} \n 语法概念：{concepts}
+你是一名英语语言专家，现在给你一段英文原句(rawSent)、句子中存在的一个错误(error)以及若干节点(nodes)，请你找出所给的节点中与英文原句中存在的错误最接近的节点。
 
-你是一名英语语言专家，现在给你一段英文句子和若干语法概念，请你判断
+你必须遵循以下准则：
+1)找出的节点必须是原来所给的nodes中的一个或若干个，不允许自己编造节点
+2)找到的节点应当尽可能与错误相贴切，不能将有关联但关联度不大的节点也都找出来
+3)如果你认为nodes没有与原句中错误相关的节点，则输出节点为None
+
+以下是提供给你的输入：
+rawSent:{rawSent}
+error:{errorTypeTitle}:{errBaseInfo}
+nodes:{nodes}
+
+你只应以如下所述的JSON格式进行回复：
+["releventNode1", "releventNode2", "releventNode3", ...]
+确保回复能被Python `json.loads`解析，例如没有尾随逗号，没有单引号等。

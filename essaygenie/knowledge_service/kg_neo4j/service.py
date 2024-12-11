@@ -32,7 +32,7 @@ class GrammarKnowledgeGraphService:
     def get_node_neighbours(self, node_id: str) -> List[str]:
         """获取指定节点的所有邻居节点ID"""
         query = """
-        MATCH (n {id: $node_id})-[:BELONGS_TO|HAS_SUBCLASS]->(neighbour)
+        MATCH (n {id: $node_id})-[:HAS_RULE|HAS_SUBCLASS]->(neighbour)
         RETURN neighbour.id AS id
         """
         results = self.execute_query(query, {"node_id": node_id})
