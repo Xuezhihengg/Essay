@@ -1,8 +1,5 @@
 import os
-import logging
 from typing import List, Optional
-
-logger = logging.getLogger()
 
 def load_text(file_path: str, encoding: Optional[str] = "utf-8") -> str:
     """加载文件的完整文本内容"""
@@ -12,10 +9,10 @@ def load_text(file_path: str, encoding: Optional[str] = "utf-8") -> str:
         with open(file_path, "r", encoding=encoding) as file:
             return file.read()
     except FileNotFoundError as e:
-        logger.error(f"File not found: {file_path}")
+        print(f"File not found: {file_path}")
         raise e
     except Exception as e:
-        logger.error(f"Error loading text from {file_path}: {e}")
+        print(f"Error loading text from {file_path}: {e}")
         raise e
 
 def load_text_lines(file_path: str, encoding: Optional[str] = "utf-8") -> List[str]:
@@ -26,10 +23,10 @@ def load_text_lines(file_path: str, encoding: Optional[str] = "utf-8") -> List[s
         with open(file_path, "r", encoding=encoding) as file:
             return file.readlines()
     except FileNotFoundError as e:
-        logger.error(f"File not found: {file_path}")
+        print(f"File not found: {file_path}")
         raise e
     except Exception as e:
-        logger.error(f"Error loading lines from {file_path}: {e}")
+        print(f"Error loading lines from {file_path}: {e}")
         raise e
 
 def dump_text(file_path: str, content: str, encoding: Optional[str] = "utf-8") -> None:
@@ -38,7 +35,7 @@ def dump_text(file_path: str, content: str, encoding: Optional[str] = "utf-8") -
         with open(file_path, "w", encoding=encoding) as file:
             file.write(content)
     except Exception as e:
-        logger.error(f"Error writing to {file_path}: {e}")
+        print(f"Error writing to {file_path}: {e}")
         raise e
 
 def dump_text_lines(file_path: str, lines: List[str], encoding: Optional[str] = "utf-8") -> None:
@@ -47,7 +44,7 @@ def dump_text_lines(file_path: str, lines: List[str], encoding: Optional[str] = 
         with open(file_path, "w", encoding=encoding) as file:
             file.writelines(lines)
     except Exception as e:
-        logger.error(f"Error writing lines to {file_path}: {e}")
+        print(f"Error writing lines to {file_path}: {e}")
         raise e
 
 def append_text(file_path: str, content: str, encoding: Optional[str] = "utf-8") -> None:
@@ -56,7 +53,7 @@ def append_text(file_path: str, content: str, encoding: Optional[str] = "utf-8")
         with open(file_path, "a", encoding=encoding) as file:
             file.write(content)
     except Exception as e:
-        logger.error(f"Error appending text to {file_path}: {e}")
+        print(f"Error appending text to {file_path}: {e}")
         raise e
 
 def append_text_lines(file_path: str, lines: List[str], encoding: Optional[str] = "utf-8") -> None:
@@ -65,5 +62,5 @@ def append_text_lines(file_path: str, lines: List[str], encoding: Optional[str] 
         with open(file_path, "a", encoding=encoding) as file:
             file.writelines(lines)
     except Exception as e:
-        logger.error(f"Error appending lines to {file_path}: {e}")
+        print(f"Error appending lines to {file_path}: {e}")
         raise e

@@ -1,4 +1,3 @@
-import logging
 from langchain_community.llms.baidu_qianfan_endpoint import QianfanLLMEndpoint
 
 class SynonymAgent:
@@ -12,7 +11,6 @@ class SynonymAgent:
         ) -> None:    
         self.show_detail = show_detail
         self.llm_max_retries = llm_max_retries
-        self.logger = logging.getLogger()
         
         self.llm = QianfanLLMEndpoint(
             model_name=model_name,

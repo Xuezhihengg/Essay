@@ -1,10 +1,12 @@
-import logging
 from typing import List, Optional, TypedDict
 
 import jieba
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from langchain_community.llms.baidu_qianfan_endpoint import QianfanLLMEndpoint
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 from essaygenie.prompts import load_prompt_from_folder
 from essaygenie.knowledge_service.kg_neo4j.api import GrammarKnowledgeGraphAPI
@@ -58,7 +60,6 @@ class GrammarAgent:
         self.grammar_kg_api = GrammarKnowledgeGraphAPI(grammar_kg_service)
         self.show_detail = show_detail
         self.llm_max_retries = llm_max_retries
-        self.logger = logging.getLogger()
         
         self.llm = QianfanLLMEndpoint(
             model_name=model_name,
@@ -122,7 +123,8 @@ class GrammarAgent:
         for error_pos_info in state["errorPosInfos"]:
             error_pos_info['candidate_nodes'] = top_nodes
         
-        self.logger.info(f"GrammarAgent.init_nodes: State initialized") 
+        if self.show_detail:
+            print("GrammarAgent.init_nodes: State initialized") 
         return state
         
     
@@ -146,16 +148,18 @@ class GrammarAgent:
             relevant_nodes = []
             # 若没有找到相关节点，则使用LLM判断
             if relevant_nodes == []:
-                self.logger.info(f"GrammarAgent.determine_most_relevant: No relevant nodes found for error type: {error_type_title}-{error_base_info}, using LLM to determine")
-                
+                if self.show_detail:
+                    print(f"GrammarAgent.determine_most_relevant: No relevant nodes found for error type: {error_type_title}-{error_base_info}, using LLM to determine")
+               
                 relevant_nodes = self.determine_most_relevant_by_llm(
                     raw_sent=state['rawSent'],
                     error=target_str,
                     nodes=candidate_nodes,
                     max_retries=self.llm_max_retries
                 )
-            self.logger.info(f"GrammarAgent.determine_most_relevant: Relevant nodes found for error type: {error_type_title}: {relevant_nodes}")
-            
+            if self.show_detail:
+                print(f"GrammarAgent.determine_most_relevant: Relevant nodes found for error type: {error_type_title}: {relevant_nodes}")
+           
             # 更新error_pos_infos中的gc_nodes和rule_nodes
             error_pos_info['gc_nodes'] = []
             for node in relevant_nodes:
@@ -166,7 +170,8 @@ class GrammarAgent:
                     error_pos_info['rule_nodes'].append(node)
             
         if done_counter == len(state['errorPosInfos']):
-            self.logger.info(f"GrammarAgent.determine_most_relevant: All relevant nodes found")
+            if self.show_detail:
+                print(f"GrammarAgent.determine_most_relevant: All relevant nodes found")
             state['searchDone'] = True
         return state
 
@@ -174,7 +179,8 @@ class GrammarAgent:
     def determine_most_relevant_by_llm(self, raw_sent: str, error: str, nodes: List[str], max_retries: int) -> List[str]:
         """使用LLM判断若干语法概念中，与输入语法解析最相关的概念"""
         if max_retries == 0:
-            self.logger.error(f"GrammarAgent.determine_most_relevant_by_llm: Max retries reached")
+            if self.show_detail:
+                print(f"GrammarAgent.determine_most_relevant_by_llm: Max retries reached")
             raise RuntimeError("GrammarAgent.determine_most_relevant_by_llm: Max retries reached")
         
         assert isinstance(raw_sent, str)
@@ -199,7 +205,8 @@ class GrammarAgent:
             return llm_output
         
         except Exception as e:
-            self.logger.warning(f"GrammarAgent.determine_most_relevant_by_llm: Retrying... remaining number of retryes: {max_retries}")
+            if self.show_detail:
+                print(f"GrammarAgent.determine_most_relevant_by_llm: Error: {e}")
             
             return self.determine_most_relevant_by_llm(
                 raw_sent=raw_sent,
@@ -234,6 +241,21 @@ class GrammarAgent:
         
         return top_matches
     
+    def cosine_similarity_search(target_str: str, str_list: List[str], top_n: int = 3) -> List[str]:
+        """在字符串列表中搜索与目标字符串余弦相似度最高的前 top_n 个字符串"""
+        vectorizer = TfidfVectorizer().fit([target_str] + str_list)
+        vectors = vectorizer.transform([target_str] + str_list)
+
+        target_vector = vectors[0]  
+        str_vectors = vectors[1:]   
+        
+        similarities = cosine_similarity(target_vector, str_vectors).flatten()
+        top_indices = np.argsort(similarities)[-top_n:][::-1]
+        top_matches = [str_list[i] for i in top_indices]
+        
+        return top_matches
+
+    
     
     def get_neibor_nodes(self, state: SentGrammarErrors) -> SentGrammarErrors:
         """获取语法概念节点的邻居节点"""
@@ -265,7 +287,8 @@ class GrammarAgent:
                 max_retries=self.llm_max_retries
             )
             
-            self.logger.info(f"GrammarAgent.generate_analysis: LLM analysis generated for error '{error}': {llm_analysis}")
+            if self.show_detail:
+                print(f"GrammarAgent.generate_analysis: LLM analysis generated for error '{error}': {llm_analysis}")
             error_pos_info['llm_analysis'] = llm_analysis
         
         return state
@@ -274,7 +297,8 @@ class GrammarAgent:
     def generate_analysis_by_llm(self, raw_sent: str, error: str, knowledge: str,max_retries: int) -> str:
         
         if max_retries == 0:
-            self.logger.error(f"GrammarAgent.determine_most_relevant_by_llm: Max retries reached")
+            if self.show_detail:
+                print(f"GrammarAgent.determine_most_relevant_by_llm: Max retries reached")
             raise RuntimeError("GrammarAgent.determine_most_relevant_by_llm: Max retries reached")
         
         system_template = load_prompt_from_folder("grammar", "generate_analysis")
@@ -294,7 +318,8 @@ class GrammarAgent:
             assert isinstance(llm_output, str)
             return llm_output
         except Exception as e:
-            self.logger.warning(f"GrammarAgent.determine_most_relevant_by_llm: Retrying... remaining number of retryes: {max_retries}")
+            if self.show_detail:
+                print(f"GrammarAgent.determine_most_relevant_by_llm: Retrying... remaining number of retryes: {max_retries}")
             
             return self.generate_analysis_by_llm(
                 raw_sent=raw_sent,

@@ -1,14 +1,14 @@
-import logging.config
-
 LOGGING_CONFIG = {
-    'version': 1,
+    'version': 1.0,
     'disable_existing_loggers': False,  
     'formatters': {
         'simple': {
-            'format': '%(asctime)s - %(levelname)s - %(message)s'
+            'format': '%(asctime)s [%(name)s] %(levelname)s  %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
         'detailed': {
-            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            'format': '%(asctime)s %(threadName)s:%(thread)d [%(name)s] %(levelname)s [%(pathname)s:%(lineno)d] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
     },
     'handlers': {
@@ -33,18 +33,10 @@ LOGGING_CONFIG = {
         },
     },
     'loggers': {
-        '': {  
+        'App': {  
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
-            'propagate': True,
-        },
-        'rotating_file': { 
-            'handlers': ['rotating_file'],
-            'level': 'ERROR',
             'propagate': False,
         },
     },
 }
-
-
-logging.config.dictConfig(LOGGING_CONFIG)
