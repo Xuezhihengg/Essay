@@ -2,15 +2,15 @@ import os
 import json
 from typing import TypedDict
 
-class Example(TypedDict):
-    Grade: str
-    Title: str
-    ModelContent: str
-    Content: str
+class Essay(TypedDict):
+    content: str
+    grade: str
+    title: str
+    model_content: str
     
 
 
-def load_json_example(filename: str) -> Example:
+def load_json_example(filename: str) -> Essay:
     """
     加载 example 文件夹中的 JSON 文件并解析为 Python 字典。
 

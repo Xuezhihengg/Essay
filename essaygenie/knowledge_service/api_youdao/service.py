@@ -50,24 +50,3 @@ class YoudaoService:
     def send_request_dummpy(self) -> dict:
         """ 网易有道智云英文作文批改服务api并返回响应 """
         return U.load_json("essaygenie/knowledge_service/api_youdao/dummpy_response_basic.json")
-        
-    
-    
-                
-        
-if __name__ == '__main__':
-    example = load_json_example("example01.json")
-    content = example['Content']
-    grade = example['Grade']
-    title = example['Title']
-    model_content = example['ModelContent']
-    
-    youdao_service = YoudaoService()
-    # youdao_res = youdao_service.send_request(
-    #     content=content,
-    #     grade=grade,
-    #     title=title,
-    #     model_content=model_content
-    # )
-    youdao_res = youdao_service.send_request_dummpy()
-    

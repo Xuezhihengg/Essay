@@ -7,7 +7,7 @@
 
 以下是提供给你的输入：
 rawSent:{rawSent}
-error:{errorTypeTitle}:{errBaseInfo}
+error:{error}
 nodes:{nodes}
 
 你只应以如下所述的JSON格式进行回复：
